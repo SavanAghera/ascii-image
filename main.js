@@ -1,7 +1,7 @@
 const ascii = document.getElementById("ascii");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const img = new Image(500, 500); 
+const img = new Image(500, 500);
 img.addEventListener(
   "load",
   (e) => {
@@ -18,27 +18,25 @@ img.addEventListener(
           0.587 * (imageData[i + 1] * imageData[i + 1]) +
           0.114 * (imageData[i + 2] * imageData[i + 2])
       );
-      ascii.appendChild(img);
       if (hsp > 127.5) {
-        data.push(0)
+        data.push(0);
       } else {
-        data.push(1)
+        data.push(1);
       }
     }
-    data.forEach((v, i) => {
-      if((i+1)% 4 === 0){
-        if ((i + 1) % 1600 === 0) {
-          value += "<br/>";
-        } else {
-          if (v) {
-            value += "#";
-          } else value += "-";
-        }
+    console.log(data);
+    for(let i=0 ;i< data.length; i+=1){
+      if ((i + 1) % 1600 === 0) {
+        value += "<br/>";
+      } else {
+        if (data[i] === 1) {
+          value += "a";
+        } else value += "c";
       }
-    });
+    }
     ascii.innerHTML = value;
   },
   false
 );
 console.log(img);
-img.src = "kali.jpg";
+img.src = "test.jpg";
