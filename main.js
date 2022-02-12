@@ -1,11 +1,10 @@
 const ascii = document.getElementById("ascii");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const img = new Image(500, 500); // Create new img element
+const img = new Image(500, 500); 
 img.addEventListener(
   "load",
   (e) => {
-    // execute drawImage statements here
     console.log("hiii");
     ctx.drawImage(img, 0, 0, 800, 500);
     let imageData = ctx.getImageData(0, 0, 800, 500).data;
