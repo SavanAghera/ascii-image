@@ -1,13 +1,26 @@
-const height = 60;
-const width = 100;
+const height = 30;
+const width = 50;
 const ascii = document.getElementById("ascii");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const img = new Image(width, height);
-img.addEventListener("load", (e) => {
-  ctx.drawImage(img, 0, 0, width, height);
+const video = document.querySelector("video");
+const constraints = {
+  video: true,
+};
+
+navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+  video.srcObject = stream;
+});
+video.addEventListener("play", (e) => {
+  setInterval(timer, 20);
+
+},
+  false
+);
+function timer () {
+  ctx.drawImage(video, 0, 0, width, height);
   let imageData = ctx.getImageData(0, 0, width, height).data;
-  console.log(imageData.filter((v, i) => i % 1 === 0));
+  canvas.style.display = 'none'
   const data = [];
   let value = "" , temp = "" , j = 0;;
   for (let i = 0; i < imageData.length; i += 4) {
@@ -20,8 +33,4 @@ img.addEventListener("load", (e) => {
   }
   console.log(data);
   ascii.innerHTML = value;
-},
-  false
-);
-console.log(img);
-img.src = "test.jpg";
+}
