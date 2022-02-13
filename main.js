@@ -6,8 +6,8 @@ img.addEventListener(
   "load",
   (e) => {
     console.log("hiii");
-    ctx.drawImage(img, 0, 0, 800, 500);
-    let imageData = ctx.getImageData(0, 0, 800, 500).data;
+    ctx.drawImage(img, 0, 0, 200, 125);
+    let imageData = ctx.getImageData(0, 0, 200, 125).data;
     console.log(imageData.filter((v, i) => i % 1 === 0));
     // canvas.style.display = "none";
     const data = [];
@@ -25,13 +25,17 @@ img.addEventListener(
       }
     }
     console.log(data);
-    for(let i=0 ;i< data.length; i+=1){
-      if ((i + 1) % 1600 === 0) {
-        value += "<br/>";
-      } else {
+    let temp = "";
+    for (let i = 0, j = 0; i < data.length; i += 1) {
+      if (i % 200 === 0) {
+        value += temp + "<br/>";
+        temp = ''
+        j++;
+      }
+      if (j%1 ==0) {
         if (data[i] === 1) {
-          value += "a";
-        } else value += "c";
+          temp += "a";
+        } else temp += "c";
       }
     }
     ascii.innerHTML = value;
